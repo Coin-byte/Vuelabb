@@ -1,5 +1,5 @@
 <template>
-  <h1>Playing around with Vue</h1>
+  <h1>{{ title }}</h1>
   <p>Pardon the css</p>
   <div class="tableContainer">
     <PoolTable />
@@ -18,11 +18,18 @@ export default {
   components: {
     PoolTable,
   },
+  data() {
+    return {
+      title: "Playing around with Vue",
+    };
+  },
+  methods: {},
 };
 </script>
 
 <style>
-#app {
+#app,
+.modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
