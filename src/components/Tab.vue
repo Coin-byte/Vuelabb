@@ -1,7 +1,7 @@
 <template>
   <div class="Tab">
     <div class="items">{{ tab.length }}</div>
-    <button @click="pay">Pay</button>
+    <button @click="testEmit">Pay</button>
     <button @click="addToTab">Tab</button>
   </div>
 </template>
@@ -10,18 +10,19 @@
 import { ref } from "vue";
 
 export default {
+  methods: {
+    testEmit() {
+      this.$emit("open");
+    },
+  },
   data() {
     const tab = ref([]);
 
-    function pay() {
-      console.log("Do something");
-    }
     function addToTab() {
       tab.value.push(1);
     }
     return {
       tab,
-      pay,
       addToTab,
     };
   },

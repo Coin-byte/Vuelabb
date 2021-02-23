@@ -1,8 +1,11 @@
 <template>
+  <teleport to=".modals" v-if="showModal">
+    <Modal :header="header" :text="text" theme="sale" @close="toggleModal" />
+  </teleport>
   <div class="poolTable">
-    <div class="poolTable_container">
+    <div class="poolTable_container" :class="{ paused: tablePaused === true }">
       <Timer />
-      <Tab />
+      <Tab @open="toggleModal" />
     </div>
   </div>
 </template>
@@ -10,15 +13,30 @@
 <script>
 import Timer from "./Timer";
 import Tab from "./Tab";
+import Modal from "./Modal";
 
 export default {
-  setup() {
+  components: {
+    Timer,
+    Tab,
+    Modal,
+  },
+  data() {
     return {
-      Timer,
-      Tab,
+    tablePaused: false,
+      showModal: false,
+      header: "This is a modal test",
+      text: "Random text to fill the void",
     };
   },
-  methods: {},
+  methods: {
+    toggleModal() {
+      this.showModal = !this.showModal;
+    },
+    togglePaused(){
+        this.tablePaused = !this.tablePaused;
+    }
+  },
 };
 </script>
 
@@ -40,5 +58,8 @@ export default {
   height: 260px;
   background-color: green;
   margin: 20px;
+}
+.poolTable_container.paused{
+    background-color: red;
 }
 </style>
